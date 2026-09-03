@@ -30,17 +30,12 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
 .card{border:1px solid rgba(255,255,255,.14);background:rgba(8,10,8,.78);backdrop-filter:blur(16px);border-radius:14px;padding:clamp(28px,5vw,58px);box-shadow:0 24px 80px rgba(0,0,0,.2)}.card.light{background:rgba(8,10,8,.78);color:#fff;border-color:rgba(255,255,255,.14)}.card p{font-size:clamp(17px,2vw,22px);line-height:1.65;margin:0;max-width:800px}.card p+p{font-family:Georgia,"Times New Roman",serif;font-size:16px;color:rgba(255,255,255,.56);margin-top:28px}.light p+p{color:rgba(255,255,255,.56)}
 .concept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden}.concept-grid div{padding:28px;background:rgba(8,10,8,.76);backdrop-filter:blur(12px)}.concept-grid strong{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px;color:rgba(255,255,255,.58)}.concept-grid span{font-size:14px;color:rgba(255,255,255,.82)}
 .original-clip,.community-video-card{display:block;padding:28px;background:rgba(8,10,8,.78);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px);border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,.2);transition:.25s}.original-clip:hover,.community-video-card:hover{background:rgba(8,10,8,.9);border-color:rgba(255,255,255,.25);transform:translateY(-2px)}.archive-media{position:relative;width:100%}.archive-thumb{width:100%;aspect-ratio:16/9;display:block;object-fit:cover;border-radius:10px;margin-bottom:22px;border:1px solid rgba(255,255,255,.1);background:#111}.archive-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.45);font-size:21px;padding-left:3px;box-shadow:0 8px 30px rgba(0,0,0,.35)}.original-title{font-family:Georgia,"Times New Roman",serif;font-size:clamp(24px,3vw,34px);line-height:1.1}.community-video-card{margin-top:18px}.community-video{width:100%;aspect-ratio:16/9;display:block;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#111;margin-bottom:22px}.community-video-card .original-title{font-size:clamp(22px,2.8vw,32px)}
-/* Clean Yee bird: transparent PNG, with no CSS shadow. */
-.yee-bird{position:fixed;left:0;top:var(--bird-top);width:68px;height:56px;z-index:12;pointer-events:none;opacity:0;will-change:transform;background-image:url("/yee-bird-winging.svg");background-size:contain;background-position:center;background-repeat:no-repeat}
-.yee-bird.run{animation:bird-cross var(--bird-duration) linear forwards}.yee-bird.reverse.run{animation-name:bird-cross-reverse}@keyframes bird-cross{0%{opacity:0;transform:translateX(-90px)}8%{opacity:.94}92%{opacity:.94}100%{opacity:0;transform:translateX(calc(100vw + 90px))}}@keyframes bird-cross-reverse{0%{opacity:0;transform:translateX(calc(100vw + 90px)) scaleX(-1)}8%{opacity:.94}92%{opacity:.94}100%{opacity:0;transform:translateX(-90px) scaleX(-1)}}
 .footer{max-width:1080px;margin:auto;padding:55px 0 20px;border-top:1px solid rgba(255,255,255,.13);display:flex;justify-content:space-between;gap:30px;color:rgba(255,255,255,.46);font-size:11px;letter-spacing:.12em;text-transform:uppercase}.footer a:hover{color:#fff}
-@media(max-width:700px){.site-bg{background-position:center top}.nav{height:64px;padding:0 20px}.navlinks{gap:16px;font-size:9px}.brand{width:46px;height:46px;min-width:46px}.brand:before{width:46px;height:46px;background-size:72px auto;background-position:center 42%}.x-link{width:30px;height:30px;margin-left:12px;font-size:13px}.hero{min-height:0;padding:90px 24px 18px}.hero-actions{gap:14px}.action{font-size:11px;padding:11px 8px}.section{padding:60px 0}.section#archive{padding-top:8px;padding-bottom:8px}.section#archive .section-head{margin-bottom:14px}.section#origin{padding-top:8px;padding-bottom:8px}.section#concept{padding-top:8px}.concept-grid{grid-template-columns:1fr}.original-clip,.community-video-card{padding:18px}.archive-thumb,.community-video{margin-bottom:18px}.archive-play{width:52px;height:52px;font-size:19px}.original-title{font-size:24px}.community-video-card{margin-top:14px}.community-video-card .original-title{font-size:22px}.yee-bird{width:56px;height:46px}.footer{flex-direction:column;padding-bottom:30px}.scroll{display:none}}
-@media(prefers-reduced-motion:reduce){.yee-bird{display:none}}
+@media(max-width:700px){.site-bg{background-position:center top}.nav{height:64px;padding:0 20px}.navlinks{gap:16px;font-size:9px}.brand{width:46px;height:46px;min-width:46px}.brand:before{width:46px;height:46px;background-size:72px auto;background-position:center 42%}.x-link{width:30px;height:30px;margin-left:12px;font-size:13px}.hero{min-height:0;padding:90px 24px 18px}.hero-actions{gap:14px}.action{font-size:11px;padding:11px 8px}.section{padding:60px 0}.section#archive{padding-top:8px;padding-bottom:8px}.section#archive .section-head{margin-bottom:14px}.section#origin{padding-top:8px;padding-bottom:8px}.section#concept{padding-top:8px}.concept-grid{grid-template-columns:1fr}.original-clip,.community-video-card{padding:18px}.archive-thumb,.community-video{margin-bottom:18px}.archive-play{width:52px;height:52px;font-size:19px}.original-title{font-size:24px}.community-video-card{margin-top:14px}.community-video-card .original-title{font-size:22px}.footer{flex-direction:column;padding-bottom:30px}.scroll{display:none}}
 </style>
 </head>
 <body>
 <div class="site-bg" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
-<div class="yee-bird" aria-hidden="true"></div>
 <nav class="nav"><a class="brand" href="#top" aria-label="Yee"></a><div class="nav-right"><div class="navlinks"><a href="#origin">Origin</a><a href="#archive">Archive</a><a href="#concept">Concept</a></div><a class="x-link" href="https://x.com/Yee_robinhoodd" target="_blank" rel="noopener noreferrer" aria-label="Yee on X">𝕏</a></div></nav>
 <header class="hero" id="top"><div class="hero-inner"><div class="eyebrow">EST. 2010 · DINGO PICTURES</div><h1>yee.</h1><p class="tagline">The dinosaur that outlived the internet.</p><div class="hero-actions"><a class="action" href="#origin">Discover Yee →</a><a class="action" href="#archive">Explore Archive →</a></div></div><div class="scroll">Scroll to explore</div></header>
 <main>
@@ -49,30 +44,5 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
 <section class="section" id="concept"><div class="section-head"><span>Concept</span><span>002</span></div><div class="card"><p>Internet media cycles accelerate and collapse. Most artifacts vanish. Yee remains — a recognizable fragment of early digital humor. This project preserves and hosts content around the original character through community edits, artwork, and remixes.</p><div class="concept-grid" style="margin-top:42px"><div><strong>Preservation</strong><span>The internet tried to kill it. Yee said no.</span></div><div><strong>Context</strong><span>Born from peak internet nonsense.</span></div><div><strong>Continuity</strong><span>Pass the Yee. Keep the brainrot alive.</span></div></div></div></section>
 <footer class="footer"><span>Yee · An internet artifact</span><a href="#top">Back to top ↑</a></footer>
 </main>
-<script>
-(function(){
-  const bird=document.querySelector('.yee-bird');
-  if(!bird || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let lastTop=-1;
-  function randomTop(){
-    let top;
-    do{top=10+Math.random()*78}while(Math.abs(top-lastTop)<12);
-    lastTop=top;
-    return top;
-  }
-  function fly(){
-    const reverse=Math.random()<.5;
-    bird.classList.remove('run','reverse');
-    bird.style.setProperty('--bird-top',randomTop()+'vh');
-    bird.style.setProperty('--bird-duration',(4.5+Math.random()*4.5)+'s');
-    if(reverse) bird.classList.add('reverse');
-    void bird.offsetWidth;
-    bird.classList.add('run');
-    const next=9000+Math.random()*16000;
-    setTimeout(fly,next);
-  }
-  setTimeout(fly,5000+Math.random()*8000);
-})();
-</script>
 </body>
 </html>
