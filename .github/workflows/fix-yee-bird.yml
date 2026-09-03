@@ -1,0 +1,36 @@
+name: Fix Yee bird animation
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install animated bird and patch index
+        env:
+          BIRD_B64: R0lGODlhRAA4AIYAAAAAAFJHNHRlTSsmGWVVO4h2WkY6J5aFaWhaQ1hROlhWR6+ZeRoWDy...REDACTED
+        run: |
+          mkdir -p public
+          printf '%s' "$BIRD_B64" | base64 -d > public/yee-bird-winging.gif
+          python3 - <<'PY2'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text()
+          s2=re.sub(r'background-image:url\("data:image/png;base64,[^\"]+"\)', 'background-image:url("/yee-bird-winging.gif")', s, count=1)
+          s2=s2.replace('Clean Yee bird: transparent PNG, with no CSS shadow.', 'Clean animated Yee bird: transparent wing-flap GIF, no green-screen background.')
+          if s2 == s:
+              raise SystemExit('Bird image replacement did not match index.html')
+          p.write_text(s2)
+          PY2
+      - name: Commit bird animation fix
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html public/yee-bird-winging.gif
+          git commit -m "Animate Yee bird wing flapping"
+          git push
