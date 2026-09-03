@@ -1,0 +1,43 @@
+name: Remove Yee bird
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  remove-bird:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remove bird from index
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = re.sub(r'/\* Clean Yee bird:.*?\*/\n\.yee-bird\{.*?\}\n\.yee-bird\.run\{.*?\}\n', '', s, flags=re.S)
+          s = re.sub(r'\.yee-bird\{width:56px;height:46px\}', '', s)
+          s = re.sub(r'\n@media\(prefers-reduced-motion:reduce\)\{\.yee-bird\{display:none\}\}', '', s)
+          s = s.replace('<div class="yee-bird" aria-hidden="true"></div>\n', '')
+          s = re.sub(r'\n<script>\n\(function\(\)\{\n  const bird=.*?\n\}\)\(\);\n</script>', '', s, flags=re.S)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit and remove workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/remove-yee-bird.yml
+          git rm .github/workflows/remove-yee-bird.yml
+          git commit -m "Remove Yee bird animation"
+          git push
