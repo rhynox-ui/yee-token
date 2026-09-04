@@ -1,0 +1,70 @@
+name: Fix Yee bird visibility
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/workflows/fix-yee-bird-visible.yml'
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make bird clearly visible
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          old = '.yee-flying-bird{position:absolute;left:-90px;top:var(--bird-y);width:var(--bird-size);height:auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35));will-change:transform;animation:yee-bird-fly var(--bird-duration) linear forwards}'
+          new = '.yee-flying-bird{position:absolute;left:var(--bird-start-x);top:var(--bird-y);width:var(--bird-size);height:auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35));will-change:transform;animation:yee-bird-fly var(--bird-duration) linear forwards}'
+          if old not in s:
+              raise SystemExit('bird CSS target not found')
+          s = s.replace(old, new, 1)
+          old = '@keyframes yee-bird-fly{from{transform:translateX(-120px)}to{transform:translateX(calc(100vw + 180px))}}'
+          new = '@keyframes yee-bird-fly{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 180px))}}'
+          if old not in s:
+              raise SystemExit('bird keyframes target not found')
+          s = s.replace(old, new, 1)
+          old = "bird.style.setProperty('--bird-y', `${18 + Math.random() * 52}vh`);"
+          new = "bird.style.setProperty('--bird-start-x', `${8 + Math.random() * 22}vw`);\n    bird.style.setProperty('--bird-y', `${15 + Math.random() * 55}vh`);"
+          if old not in s:
+              raise SystemExit('bird y target not found')
+          s = s.replace(old, new, 1)
+          old = "bird.style.setProperty('--bird-size', `${68 + Math.random() * 24}px`);"
+          new = "bird.style.setProperty('--bird-size', `${76 + Math.random() * 24}px`);"
+          if old not in s:
+              raise SystemExit('bird size target not found')
+          s = s.replace(old, new, 1)
+          old = "bird.style.setProperty('--bird-duration', `${8 + Math.random() * 4}s`);"
+          new = "bird.style.setProperty('--bird-duration', `${14 + Math.random() * 5}s`);"
+          if old not in s:
+              raise SystemExit('bird duration target not found')
+          s = s.replace(old, new, 1)
+          old = "timer = setTimeout(fly, 7000 + Math.random() * 5000);"
+          new = "timer = setTimeout(fly, 4000 + Math.random() * 4000);"
+          if old not in s:
+              raise SystemExit('bird timer target not found')
+          s = s.replace(old, new, 1)
+          old = '@media(prefers-reduced-motion:reduce){.yee-bird-layer{display:none}}'
+          new = '@media(prefers-reduced-motion:reduce){.yee-flying-bird{animation-duration:30s!important}.yee-flying-bird .yee-bird-wing{animation-duration:.35s!important}}'
+          if old in s:
+              s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+      - name: Commit bird fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Make Yee bird clearly visible'
+          git push
+      - name: Remove temporary workflow
+        run: |
+          rm -f .github/workflows/fix-yee-bird-visible.yml
+          git add .github/workflows/fix-yee-bird-visible.yml
+          git commit -m 'Remove temporary bird visibility workflow'
+          git push
