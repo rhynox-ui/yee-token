@@ -1,0 +1,41 @@
+name: Raise Yee Audio to 100%
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/workflows/raise-yee-audio-100.yml'
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set audio volume to 100 percent
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old="audio.volume = 0.50;"
+          new="audio.volume = 1.00;"
+          if old not in s:
+              raise SystemExit('audio volume target not found')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+      - name: Commit audio change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Raise Yee background audio to 100 percent'
+          git push
+      - name: Remove temporary workflow
+        run: |
+          rm -f .github/workflows/raise-yee-audio-100.yml
+          git add .github/workflows/raise-yee-audio-100.yml
+          git commit -m 'Remove temporary audio workflow'
+          git push
