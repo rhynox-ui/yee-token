@@ -37,13 +37,13 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
 <body>
 <style id="yee-single-bird-style">
 .yee-bird-layer{position:fixed;inset:0;z-index:15;pointer-events:none;overflow:hidden}
-.yee-flying-bird{position:absolute;left:-90px;top:var(--bird-y);width:var(--bird-size);height:auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35));will-change:transform;animation:yee-bird-fly var(--bird-duration) linear forwards}
+.yee-flying-bird{position:absolute;left:var(--bird-start-x);top:var(--bird-y);width:var(--bird-size);height:auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.35));will-change:transform;animation:yee-bird-fly var(--bird-duration) linear forwards}
 .yee-flying-bird .yee-bird-bob{animation:yee-bird-bob var(--bird-bob-duration) ease-in-out infinite alternate}
 .yee-flying-bird .yee-bird-wing{transform-box:fill-box;transform-origin:center;animation:yee-bird-wing var(--bird-wing-speed) ease-in-out infinite alternate}
-@keyframes yee-bird-fly{from{transform:translateX(-120px)}to{transform:translateX(calc(100vw + 180px))}}
+@keyframes yee-bird-fly{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 180px))}}
 @keyframes yee-bird-bob{from{transform:translateY(-3px)}to{transform:translateY(5px)}}
 @keyframes yee-bird-wing{from{transform:rotate(-5deg)}to{transform:rotate(10deg)}}
-@media(prefers-reduced-motion:reduce){.yee-bird-layer{display:none}}
+@media(prefers-reduced-motion:reduce){.yee-flying-bird{animation-duration:30s!important}.yee-flying-bird .yee-bird-wing{animation-duration:.35s!important}}
 </style>
 
 <div class="yee-bird-layer" aria-hidden="true">
@@ -120,16 +120,17 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
   if (!bird) return;
   let timer;
   const fly = () => {
-    bird.style.setProperty('--bird-y', `${18 + Math.random() * 52}vh`);
-    bird.style.setProperty('--bird-size', `${68 + Math.random() * 24}px`);
-    bird.style.setProperty('--bird-duration', `${8 + Math.random() * 4}s`);
+    bird.style.setProperty('--bird-start-x', `${8 + Math.random() * 22}vw`);
+    bird.style.setProperty('--bird-y', `${15 + Math.random() * 55}vh`);
+    bird.style.setProperty('--bird-size', `${76 + Math.random() * 24}px`);
+    bird.style.setProperty('--bird-duration', `${14 + Math.random() * 5}s`);
     bird.style.setProperty('--bird-bob-duration', `${0.8 + Math.random() * 0.7}s`);
     bird.style.setProperty('--bird-wing-speed', `${0.12 + Math.random() * 0.08}s`);
     bird.style.animation = 'none';
     void bird.offsetWidth;
     bird.style.animation = 'yee-bird-fly var(--bird-duration) linear forwards';
     clearTimeout(timer);
-    timer = setTimeout(fly, 7000 + Math.random() * 5000);
+    timer = setTimeout(fly, 4000 + Math.random() * 4000);
   };
   fly();
 })();
