@@ -108,16 +108,29 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
 (() => {
   const audio = document.getElementById('yee-bg-audio');
   if (!audio) return;
+
   audio.volume = 1.0;
   audio.loop = true;
+  audio.preload = 'auto';
+
   const startAudio = () => {
     audio.volume = 1.0;
-    audio.play().catch(() => {});
+    if (audio.paused) audio.play().catch(() => {});
   };
+
+  // Try immediately; browsers that block audible autoplay will start it on the first user gesture.
   startAudio();
-  window.addEventListener('pointerdown', startAudio, { once: true, passive: true });
-  window.addEventListener('keydown', startAudio, { once: true });
-  window.addEventListener('touchstart', startAudio, { once: true, passive: true });
+
+  ['pointerdown','pointerup','touchstart','touchend','click','keydown'].forEach(eventName => {
+    document.addEventListener(eventName, startAudio, { passive: true, capture: true });
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) startAudio();
+  });
+
+  audio.addEventListener('canplay', startAudio, { passive: true });
+  audio.addEventListener('loadeddata', startAudio, { passive: true });
 })();
 </script>
 <!-- yee-background-audio-runtime -->
