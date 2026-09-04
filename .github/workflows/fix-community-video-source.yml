@@ -1,0 +1,42 @@
+name: Fix Community Video Source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-community-video-source.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Point player to fixed video
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          old = '/Yee%20(1).mp4'
+          new = '/VID-20260903-WA0059.mp4'
+          if old not in s:
+              raise SystemExit('Expected video source not found')
+          p.write_text(s.replace(old, new, 1))
+          PY
+
+      - name: Commit website fix and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Use fixed Yee community video'
+          git push
+          rm .github/workflows/fix-community-video-source.yml
+          git add .github/workflows/fix-community-video-source.yml
+          git commit -m 'Remove temporary video source workflow'
+          git push
