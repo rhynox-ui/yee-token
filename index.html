@@ -37,7 +37,7 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
 <body>
 <style id="yee-single-bird-style">
 .yee-bird-layer{position:fixed;inset:0;z-index:19;pointer-events:none;overflow:hidden}
-.yee-flying-bird{position:absolute;left:var(--bird-start-x);top:var(--bird-y);width:var(--bird-size);height:auto;filter:drop-shadow(0 5px 8px rgba(0,0,0,.75)) drop-shadow(0 0 3px rgba(255,255,255,.25));will-change:transform;animation:yee-bird-fly var(--bird-duration) linear forwards}
+.yee-flying-bird{position:absolute;left:var(--bird-start-x);top:var(--bird-y);width:calc(var(--bird-size) / 3);height:auto;filter:drop-shadow(0 5px 8px rgba(0,0,0,.75)) drop-shadow(0 0 3px rgba(255,255,255,.25));will-change:transform;animation:yee-bird-fly var(--bird-duration) linear forwards}
 .yee-flying-bird .yee-bird-bob{animation:yee-bird-bob var(--bird-bob-duration) ease-in-out infinite alternate}
 .yee-flying-bird .yee-bird-wing{transform-box:fill-box;transform-origin:center;animation:yee-bird-wing var(--bird-wing-speed) ease-in-out infinite alternate}
 @keyframes yee-bird-fly{from{transform:translateX(0)}to{transform:translateX(calc(100vw + 220px))}}
@@ -77,40 +77,49 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
 <nav class="nav"><a class="brand" href="#top" aria-label="Yee"></a><div class="nav-right"><div class="navlinks"><a href="#origin">Origin</a><a href="#archive">Archive</a><a href="#concept">Concept</a></div><a class="x-link" href="https://x.com/Yee_robinhoodd" target="_blank" rel="noopener noreferrer" aria-label="Yee on X">𝕏</a></div></nav>
 <header class="hero" id="top"><div class="hero-inner"><div class="eyebrow">EST. 2010 · DINGO PICTURES</div><h1>yee.</h1><p class="tagline">The dinosaur that outlived the internet.</p><div class="hero-actions"><a class="action" href="#origin">Discover Yee →</a><a class="action" href="#archive">Explore Archive →</a></div></div><div class="scroll">Scroll to explore</div></header>
 <main>
-<section class="section" id="archive"><div class="section-head"><span>Original Clip</span><span>003 · YEE FILES</span></div><a class="original-clip" href="https://youtu.be/EjnE2JkXMLk?si=ABV8ZOGNXD5KC-Fq" target="_blank" rel="noopener noreferrer"><div class="archive-media"><img class="archive-thumb" src="https://img.youtube.com/vi/EjnE2JkXMLk/maxresdefault.jpg" alt="Yee Original Clip YouTube thumbnail" loading="lazy"><span class="archive-play" aria-hidden="true">▶</span></div><div class="original-title">Original Clip</div></a><div class="community-video-card"><video class="community-video" controls playsinline preload="metadata"><source src="/VID-20260903-WA0059.mp4" type="video/mp4"></video><div class="original-title">Community Archive</div></div></section>
-<section class="section" id="origin"><div class="section-head"><span>Origin</span><span>001 · HISTORY</span></div><div class="card"><p>Yee is a classic internet meme born from an awkward dinosaur moment that somehow became immortal.</p><p>What started as a strange clip turned into a sound, a reaction, and a piece of internet history that refused to disappear.</p></div></section>
-<section class="section" id="concept"><div class="section-head"><span>Concept</span><span>002 · THE IDEA</span></div><div class="concept-grid"><div><strong>01 · Memetic</strong><span>Recognizable without explanation.</span></div><div><strong>02 · Timeless</strong><span>A relic that keeps finding new timelines.</span></div><div><strong>03 · On-chain</strong><span>Yee lives where internet culture lives next.</span></div></div></section>
+<section class="section" id="archive"><div class="section-head"><span>Original Clip</span><span>003 · YEE FILES</span></div><a class="original-clip" href="https://youtu.be/EjnE2JkXMLk?si=ABV8ZOGNXD5KC-Fq" target="_blank" rel="noopener noreferrer"><div class="archive-media"><img class="archive-thumb" src="https://img.youtube.com/vi/EjnE2JkXMLk/maxresdefault.jpg" alt="Yee Original Clip YouTube thumbnail" loading="lazy"><span class="archive-play" aria-hidden="true">▶</span></div><div class="original-title">Original Clip</div></a><div class="community-video-card"><video class="community-video" controls playsinline preload="metadata"><source src="/Yee%20(1).mp4" type="video/mp4"></video><div class="original-title">Community Archive</div></div></section>
+<section class="section" id="origin"><div class="section-head"><span>Origin</span><span>001 · THE BEGINNING</span></div><div class="card light"><p>Yee emerged from the strangest corner of internet animation and somehow became immortal.</p><p>Born from a low-budget dinosaur film and amplified by the internet, the sound became the joke. The joke became the meme. And the meme never left.</p></div></section>
+<section class="section" id="concept"><div class="section-head"><span>Concept</span><span>002 · WHY YEE</span></div><div class="concept-grid"><div><strong>01 · MEMORY</strong><span>You heard it once. You never forgot it.</span></div><div><strong>02 · CHAOS</strong><span>No context required. Just Yee.</span></div><div><strong>03 · CULTURE</strong><span>An internet relic still flying.</span></div></div></section>
 </main>
-<footer class="footer"><span>Yee · The dinosaur that outlived the internet.</span><a href="https://x.com/Yee_robinhoodd" target="_blank" rel="noopener noreferrer">Follow on X</a></footer>
+<footer class="footer"><span>Yee — The Dinosaur That Outlived the Internet</span><a href="https://x.com/Yee_robinhoodd" target="_blank" rel="noopener noreferrer">Follow on X</a></footer>
 <script>
 (() => {
   const bird = document.getElementById('yee-flying-bird');
   if (!bird) return;
-  let timer;
-  const fly = () => {
-    bird.style.setProperty('--bird-start-x', `-14vw`);
-    bird.style.setProperty('--bird-y', `${10 + Math.random() * 48}vh`);
-    bird.style.setProperty('--bird-size', `${120 + Math.random() * 40}px`);
-    bird.style.setProperty('--bird-duration', `${10 + Math.random() * 4}s`);
-    bird.style.setProperty('--bird-bob-duration', `${0.7 + Math.random() * 0.5}s`);
-    bird.style.setProperty('--bird-wing-speed', `${0.10 + Math.random() * 0.06}s`);
+  const run = () => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    bird.style.setProperty('--bird-size', `${Math.max(48, Math.min(96, vw * 0.16))}px`);
+    bird.style.setProperty('--bird-start-x', `${-Math.max(80, vw * 0.12)}px`);
+    bird.style.setProperty('--bird-y', `${Math.max(80, Math.min(vh * 0.55, 150 + Math.random() * Math.max(0, vh - 300)))}px`);
+    bird.style.setProperty('--bird-duration', `${Math.max(10, Math.min(18, vw / 70))}s`);
+    bird.style.setProperty('--bird-bob-duration', '1.1s');
+    bird.style.setProperty('--bird-wing-speed', '0.28s');
     bird.style.animation = 'none';
     void bird.offsetWidth;
-    bird.style.animation = 'yee-bird-fly var(--bird-duration) linear forwards';
-    clearTimeout(timer);
-    timer = setTimeout(fly, 1800 + Math.random() * 2200);
+    bird.style.animation = '';
   };
-  fly();
+  run();
+  window.addEventListener('resize', run, { passive: true });
 })();
-
-const audio = document.getElementById('yee-bg-audio');
-if (audio) {
-  audio.volume = 1.00;
-  audio.loop = true;
-  const resume = () => audio.play().catch(() => {});
-  resume();
-  ['pointerdown','touchstart','keydown'].forEach(e => window.addEventListener(e, resume, {once:true, passive:true}));
-}
 </script>
+<script>
+/* yee-background-audio-runtime */
+(() => {
+  const audio = document.getElementById('yee-bg-audio');
+  if (!audio) return;
+  audio.volume = 1.0;
+  audio.loop = true;
+  const startAudio = () => {
+    audio.volume = 1.0;
+    audio.play().catch(() => {});
+  };
+  startAudio();
+  window.addEventListener('pointerdown', startAudio, { once: true, passive: true });
+  window.addEventListener('keydown', startAudio, { once: true });
+  window.addEventListener('touchstart', startAudio, { once: true, passive: true });
+})();
+</script>
+<!-- yee-background-audio-runtime -->
 </body>
 </html>
