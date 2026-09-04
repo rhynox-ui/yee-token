@@ -35,6 +35,41 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
 </style>
 </head>
 <body>
+<style id="yee-single-bird-style">
+.yee-bird-layer{position:fixed;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.yee-flying-bird{position:absolute;left:-90px;top:var(--bird-y);width:var(--bird-size);height:auto;will-change:transform;animation:yee-bird-fly var(--bird-duration) linear forwards}
+.yee-flying-bird .yee-bird-bob{animation:yee-bird-bob var(--bird-bob-duration) ease-in-out infinite alternate}
+.yee-flying-bird .yee-bird-wing{transform-box:fill-box;transform-origin:center;animation:yee-bird-wing var(--bird-wing-speed) ease-in-out infinite alternate}
+@keyframes yee-bird-fly{from{transform:translateX(-120px)}to{transform:translateX(calc(100vw + 180px))}}
+@keyframes yee-bird-bob{from{transform:translateY(-3px)}to{transform:translateY(5px)}}
+@keyframes yee-bird-wing{from{transform:rotate(-5deg)}to{transform:rotate(10deg)}}
+@media(prefers-reduced-motion:reduce){.yee-bird-layer{display:none}}
+</style>
+
+<div class="yee-bird-layer" aria-hidden="true">
+  <svg class="yee-flying-bird" id="yee-flying-bird" viewBox="0 0 80 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g class="yee-bird-bob">
+      <ellipse cx="32" cy="46" rx="18" ry="2.5" fill="black" opacity=".07"/>
+      <path d="M12 28 L2 22 L4 28 L2 34 Z" fill="#3a3a3f"/>
+      <ellipse cx="33" cy="28" rx="20" ry="12.5" fill="#252a32"/>
+      <ellipse cx="33" cy="32" rx="12" ry="5" fill="white" opacity=".06"/>
+      <circle cx="55" cy="21" r="10.5" fill="#252a32"/>
+      <circle cx="55" cy="21" r="10.5" fill="white" opacity=".04"/>
+      <circle cx="58.5" cy="19" r="1.7" fill="white" opacity=".95"/>
+      <circle cx="59" cy="19.3" r=".8" fill="#111"/>
+      <path d="M64.5 19 L73 21.5 L64.5 25 Z" fill="#f2c14e"/>
+      <path d="M64.5 19 L73 21.5 L64.5 22.2 Z" fill="#f7d47a" opacity=".9"/>
+      <g class="yee-bird-wing">
+        <path d="M24 26 C18 22,12 20,8 24 C12 28,18 31,28 30 C32 29.5,36 28,38 26 C34 24,29 24.5,24 26 Z" fill="#3a3a3f"/>
+      </g>
+      <g class="yee-bird-wing">
+        <path d="M28 28 C18 24,6 22,3 28 C8 34,20 38,34 36 C40 35,46 32,48 28 C42 25,34 26,28 28 Z" fill="#252a32" stroke="black" stroke-opacity=".08" stroke-width=".5"/>
+        <path d="M14 28 Q28 30 38 28" stroke="white" stroke-opacity=".08" stroke-width=".6" fill="none"/>
+      </g>
+    </g>
+  </svg>
+</div>
+
 <div class="site-bg" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
 <audio id="yee-bg-audio" autoplay loop preload="auto" aria-hidden="true">
 <source src="/Yee%20(1).mp3" type="audio/mpeg">
@@ -76,6 +111,27 @@ main{padding:0 clamp(18px,5vw,64px) 90px}.section{max-width:1080px;margin:0 auto
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden && audio.paused) start();
   });
+})();
+</script>
+
+<script id="yee-single-bird-script">
+(() => {
+  const bird = document.getElementById('yee-flying-bird');
+  if (!bird) return;
+  let timer;
+  const fly = () => {
+    bird.style.setProperty('--bird-y', `${12 + Math.random() * 58}vh`);
+    bird.style.setProperty('--bird-size', `${42 + Math.random() * 18}px`);
+    bird.style.setProperty('--bird-duration', `${9 + Math.random() * 5}s`);
+    bird.style.setProperty('--bird-bob-duration', `${0.8 + Math.random() * 0.7}s`);
+    bird.style.setProperty('--bird-wing-speed', `${0.12 + Math.random() * 0.08}s`);
+    bird.style.animation = 'none';
+    void bird.offsetWidth;
+    bird.style.animation = 'yee-bird-fly var(--bird-duration) linear forwards';
+    clearTimeout(timer);
+    timer = setTimeout(fly, 18000 + Math.random() * 18000);
+  };
+  fly();
 })();
 </script>
 </body>
