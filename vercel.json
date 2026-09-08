@@ -3,5 +3,8 @@
   "framework": null,
   "buildCommand": null,
   "outputDirectory": ".",
-  "cleanUrls": false
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/face-icon.svg", "destination": "/face-icon-v2.svg" }
+  ]
 }
